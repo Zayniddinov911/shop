@@ -5,11 +5,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pages.urls', namespace='pages'))
+    path('', include('pages.urls', namespace='pages')),
+    path('Blog/', include('blog.urls', namespace='blogs')),
 ]
 
 
-urlpatterns += static(settings.STATIC_URL, document_dir=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_dir=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
