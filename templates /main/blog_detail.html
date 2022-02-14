@@ -13,7 +13,11 @@
                         <ul>
                             <li>By {{ posts.author }}</li>
                             <li>{{ posts.created_at|date:'F d, Y' }}</li>
-                            <li>8 Comments</li>
+                            {% if posts.comments.all.count > 1 %}
+                            <li>{{ posts.comments.all.count }} Comments</li>
+                            {% else %}
+                            <li>{{ posts.comments.all.count }} Comment</li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -102,6 +106,21 @@
                                     {% endif %}
                                 </div>
                             </div>
+                        </div>
+                        <div class="container py-3">
+                            {% for comment in posts.comments.all %}
+                                <div class="row mb-1" style="border: 1px solid wheat; border-radius: 10px;">
+                                    <div class="col-6">
+                                        <strong>{{ comment.name }}</strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        {{ comment.created_at|timesince }}
+                                    </div>
+                                    <div class="col-12">
+                                        <p>{{ comment.comment }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="blog__details__comment">
                             <h4>Leave A Comment</h4>
