@@ -19,3 +19,7 @@ class ContactView(CreateView):
 
     def get_success_url(self):
         return reverse('pages:contact')
+
+
+class AboutView(TemplateView):
+    template_name = 'main/about.html'
