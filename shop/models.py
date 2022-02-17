@@ -28,6 +28,7 @@ class CategoryModel(models.Model):
 
 class ProductModel(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('name'))
+    image = models.ImageField(upload_to='products', verbose_name=_('image'))
     price = models.FloatField(verbose_name=_('price'))
     discount = models.PositiveIntegerField(default=0, verbose_name=_('discount'))
     short_description = models.TextField(verbose_name=_('short description'))
