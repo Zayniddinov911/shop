@@ -43,8 +43,8 @@
                             <li {% if request.path == '/' %}class="active"{% endif %}>
                                 <a href="{% url 'pages:home' %}">Home</a>
                             </li>
-                            <li>
-                                <a href="">Shop</a>
+                            <li {% if request.path == '/shop/' %}class="active"{% endif %}>
+                                <a href="{% url 'shop:shop' %}">Shop</a>
                             </li>
                             <li {% if request.path == '/Blog/' %}class="active"{% endif %}>
                                 <a href="{% url 'blogs:blog_list' %}">Blog</a>

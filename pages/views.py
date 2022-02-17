@@ -4,6 +4,7 @@ from .forms import ContactModelForm
 from blog.models import BlogPostModel
 from .models import BannerModel
 
+
 class HomePageView(TemplateView):
     template_name = 'main/index.html'
 
