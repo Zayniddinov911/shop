@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
 class TagModel(models.Model):
@@ -52,6 +53,15 @@ class ProductModel(models.Model):
             return self.price
         # return ((100 - self.discount) / 100) * self.price   # both of calculations are correct
         return self.price - (self.price / 100) * self.discount  # both of calculations are correct
+
+    def is_new(self):
+        return (timezone.now() - self.created_at).days <= 3
+
+    def is_discount(self):
+        return self.discount != 0
+
+    def get_related(self):
+        return ProductModel.objects.filter(category__name=self.category).exclude(pk=self.pk)[:3]
 
     def __str__(self):
         return self.name
