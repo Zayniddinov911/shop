@@ -1,6 +1,34 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+
+
+class ColorModel(models.Model):
+    code = models.CharField(max_length=7, verbose_name=_('color'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+
+    def __str__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = 'color'
+        verbose_name_plural = 'colors'
+
+    # def color(self, obj):
+    #     return mark_safe(f"<div style='width=20px; height=20px; background={obj}'></div>")
+
+
+class SizeModel(models.Model):
+    name = models.CharField(max_length=5, verbose_name=_('name'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'size'
+        verbose_name_plural = 'sizes'
 
 
 class TagModel(models.Model):
@@ -45,6 +73,18 @@ class ProductModel(models.Model):
         related_name='products',
         verbose_name=_('tag')
 
+    )
+    color = models.ManyToManyField(
+        ColorModel,
+        related_name='products',
+        verbose_name=_('color'),
+        null=True,
+    )
+    size = models.ManyToManyField(
+        SizeModel,
+        related_name='products',
+        verbose_name=_('size'),
+        null=True,
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
 
