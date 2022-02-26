@@ -12,6 +12,8 @@ class ShopView(ListView):
         context = super(ShopView, self, **kwargs).get_context_data()
         context['categories'] = CategoryModel.objects.all()
         context['tags'] = TagModel.objects.all()
+        context['size'] = SizeModel.objects.all()
+        context['color'] = ColorModel.objects.all()
         return context
 
     def get_queryset(self):
@@ -24,17 +26,22 @@ class ShopView(ListView):
         cat = self.request.GET.get('cat')
         if cat:
             qs = qs.filter(category_id=cat)
-            return qs
+            # return qs
 
         tag = self.request.GET.get('tag')
         if tag:
-            qs = qs.filter(tag__name=tag)
-            return qs
+            qs = qs.filter(tag__id=tag)
+            # return qs
+
+        size = self.request.GET.get('size')
+        if size:
+            qs = qs.filter(size__id=size)
+
+        color = self.request.GET.get('color')
+        if color:
+            qs = qs.filter(color_id=color)
 
         return qs
-
-
-
 
 
 class ProductDetailView(DetailView):

@@ -1276,7 +1276,7 @@ ol {
 	padding-top: 15px;
 }
 
-.shop__sidebar__size label {
+.shop__sidebar__size a {
 	color: #111111;
 	font-size: 15px;
 	font-weight: 700;
@@ -1289,13 +1289,13 @@ ol {
 	cursor: pointer;
 }
 
-.shop__sidebar__size label.active {
+.active {
 	background: #111111;
 	color: #ffffff;
 	border-color: #111111;
 }
 
-.shop__sidebar__size label input {
+.shop__sidebar__size a {
 	position: absolute;
 	visibility: hidden;
 }
@@ -3848,4 +3848,12 @@ ol {
 	.categories__text:before {
 		height: 250px;
 	}
+}
+
+.my-colors {
+	height: 36px;
+	width: 36px;
+	border: 1px solid #e5e5e5;
+	content: "";
+	border-radius: 50%;
 }
