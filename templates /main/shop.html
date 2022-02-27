@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load extra %}
 {% block extra_css %}
     <style>
         a:hover {
@@ -50,10 +50,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
-                                    <select>
-                                        <option value="">Low To High</option>
-                                        <option value="">$0 - $55</option>
-                                        <option value="">$55 - $100</option>
+                                    <select onchange="getParamSearch('price_sort', this.value)">
+                                        <option value="">---</option>
+                                        <option {% if reqeuest.GET.price == 'price_sort'%} selected {% endif %} value="price">Low to High</option>
+                                        <option {% if reqeuest.GET.price == '-price_sort'%} selected {% endif %} value="-price">High to Low</option>
                                     </select>
                                 </div>
                             </div>
@@ -163,13 +163,15 @@
         $(".js-range-slider").ionRangeSlider({
             type: "double",
             grid: true,
-            min: 0,
-            max: 1000,
-            {#from: 200,#}
-            {#to: 800,#}
+            min: {{ min_price }},
+            max: {{ max_price }},
+            from: {% get_current_price request 0 %},
+            to: {% get_current_price request 1 %},
             prefix: "$",
             onFinish(data){
-                console.log(data.from, data.to)
+                let result = data.from.toString() + ';' + data.to.toString()
+                getParamSearch('price', result)
+                {#console.log(data.from, data.to)#}
             }
         });
     </script>
