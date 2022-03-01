@@ -1288,9 +1288,8 @@ ol {
 	margin-right: 5px;
 	cursor: pointer;
 }
-
 .active {
-	background: #111111;
+	background: #ffffff;
 	color: #ffffff;
 	border-color: #111111;
 }

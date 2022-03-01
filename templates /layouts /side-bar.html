@@ -117,7 +117,7 @@
                 <div class="card-body">
                     <div class="shop__sidebar__tags">
                         {% for tag in tags %}
-                            <a {% if request.GET.tag == tag.name %}style="background: #000000; color: #FFFFFF" {% endif %}
+                            <a {% if request.GET.tag == tag.name %}class="active"{% endif %}
                                onclick="getParamSearch('tag', {{ tag.pk }})">{{ tag }}</a>
                         {% endfor %}
                     </div>
