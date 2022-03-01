@@ -67,7 +67,7 @@
                                         {% endif %}
                                         <ul class="product__hover">
                                             <li>
-                                                <a href="{% url 'products:add_wishlist' object.pk %}">
+                                                <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
                                                     <img src="{% static 'img/icon/heart.png' %}" alt="">
                                                 </a>
                                             </li>
