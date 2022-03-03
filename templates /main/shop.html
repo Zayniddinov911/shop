@@ -7,7 +7,8 @@
             cursor: pointer;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 {% endblock %}
 
 {% block content %}
@@ -52,8 +53,12 @@
                                     <p>Sort by Price:</p>
                                     <select onchange="getParamSearch('price_sort', this.value)">
                                         <option value="">---</option>
-                                        <option {% if reqeuest.GET.price == 'price_sort'%} selected {% endif %} value="price">Low to High</option>
-                                        <option {% if reqeuest.GET.price == '-price_sort'%} selected {% endif %} value="-price">High to Low</option>
+                                        <option {% if reqeuest.GET.price == 'price_sort' %} selected {% endif %}
+                                                                                            value="price">Low to High
+                                        </option>
+                                        <option {% if reqeuest.GET.price == '-price_sort' %} selected {% endif %}
+                                                                                             value="-price">High to Low
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -75,7 +80,11 @@
                                         <ul class="product__hover">
                                             <li>
                                                 <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
-                                                    <img src="{% static 'img/icon/heart.png' %}" alt="">
+                                                {% if request.user.is_authenticated and object|is_wishlist:request.user %}
+                                                    <img src="{% static 'img/icon/heart-b.png' %}">
+                                                {% elif request.user.is_authenticated %}
+                                                    <img src="{% static 'img/icon/heart.png' %}">
+                                                {% endif %}
                                                 </a>
                                             </li>
                                             <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
@@ -171,10 +180,18 @@
             from: {% get_current_price request 0 %},
             to: {% get_current_price request 1 %},
             prefix: "$",
-            onFinish(data){
+            onFinish(data) {
                 let result = data.from.toString() + ';' + data.to.toString()
                 getParamSearch('price', result)
                 {#console.log(data.from, data.to)#}
+            }
+        });
+    </script>
+    <script>
+        $('.fa-heart').click(function () {
+            if ($(this).attr('att') == 0) {
+                $(this).css('color', 'red');
+                $(this).attr('att', 1);
             }
         });
     </script>
