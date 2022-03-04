@@ -80,11 +80,11 @@
                                         <ul class="product__hover">
                                             <li>
                                                 <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
-                                                {% if request.user.is_authenticated and object|is_wishlist:request.user %}
-                                                    <img src="{% static 'img/icon/heart-b.png' %}">
-                                                {% elif request.user.is_authenticated %}
-                                                    <img src="{% static 'img/icon/heart.png' %}">
-                                                {% endif %}
+                                                    {% if request.user.is_authenticated and object|is_wishlist:request.user %}
+                                                        <img src="{% static 'img/icon/heart-b.png' %}">
+                                                    {% elif request.user.is_authenticated %}
+                                                        <img src="{% static 'img/icon/heart.png' %}">
+                                                    {% endif %}
                                                 </a>
                                             </li>
                                             <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
@@ -97,7 +97,13 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6>{{ object.name }}</h6>
-                                        <a href="#" class="add-cart">+ Add To Cart</a>
+                                        {% if request|is_cart:object %}
+                                            <a href="{% url 'products:add_cart' pk=object.pk %}"
+                                               ?next={{ request.path }} class="add-cart">- Remove from Cart</a>
+                                        {% else %}
+                                            <a href="{% url 'products:add_cart' pk=object.pk %}"
+                                               ?next={{ request.path }} class="add-cart">+ Add to Cart</a>
+                                        {% endif %}
                                         <div class="rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>

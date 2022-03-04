@@ -106,3 +106,9 @@ class ProductModel(models.Model):
     class Meta:
         verbose_name = 'product'
         verbose_name_plural = 'products'
+
+    @staticmethod
+    def get_cart_info(cart):
+        return ProductModel.objects.filter(id__in=cart)   # in bu faqat list va tuple tipidagi (boyicha) malumotlani ciqarib beradi
+
+

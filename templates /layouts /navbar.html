@@ -1,6 +1,6 @@
 {#{% extends 'base.html' %}#}
 {% load static %}
-
+{% load extra %}
 {% block content %}
     <header class="header">
         <div class="header__top">
@@ -62,10 +62,13 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{% static 'img/icon/search.png' %}" alt=""></a>
                         <a href="{% url 'products:wishlist' %}">
-                            <img src="{% static 'img/icon/heart.png' %}" alt="">
+                            {% if request.user.is_authenticated %}
+                                <img src="{% static 'img/icon/heart.png' %}" alt="">
+                            {% endif %}
                         </a>
-                        <a href="#"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        {% get_cart_info request as cart_info %}
+                        <a href="{% url 'products:shop_cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>{{ cart_info.0 }}</span></a>
+                        <div class="price">${{ cart_info.1 }}</div>
                     </div>
                 </div>
             </div>
