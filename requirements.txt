@@ -3,5 +3,6 @@ backports.zoneinfo==0.2.1
 Django==4.0.2
 django-decouple==2.1
 django-environ==0.8.1
+django-registration-redux==2.9
 Pillow==9.0.1
 sqlparse==0.4.2

@@ -98,11 +98,9 @@
                                     <div class="product__item__text">
                                         <h6>{{ object.name }}</h6>
                                         {% if request|is_cart:object %}
-                                            <a href="{% url 'products:add_cart' pk=object.pk %}"
-                                               ?next={{ request.path }} class="add-cart">- Remove from Cart</a>
+                                            <a href="{% url 'products:add_cart' pk=object.pk %}?next={{ request.path }}" class="add-cart">- Remove from Cart</a>
                                         {% else %}
-                                            <a href="{% url 'products:add_cart' pk=object.pk %}"
-                                               ?next={{ request.path }} class="add-cart">+ Add to Cart</a>
+                                            <a href="{% url 'products:add_cart' pk=object.pk %}?next={{ request.path }}" class="add-cart">+ Add to Cart</a>
                                         {% endif %}
                                         <div class="rating">
                                             <i class="fa fa-star"></i>

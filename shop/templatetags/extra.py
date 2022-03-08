@@ -32,4 +32,4 @@ def get_cart_info(request):
 
 @register.filter
 def is_cart(request, product):
-    return product.pk in request.session.get('cart')
+    return product.pk in request.session.get("cart", [])
