@@ -64,3 +64,4 @@ class ShopView(ListView):
 class ProductDetailView(DetailView):
     template_name = 'main/product_detail.html'
     model = ProductModel
+
