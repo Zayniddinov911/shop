@@ -16,7 +16,7 @@
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                    <a href="">{% trans 'History' %}</a>
+                                    <a href="{% url 'order:history' %}">{% trans 'History' %}</a>
                                     <a href="{% url 'profile:home' %}">{% trans 'Profile' %}</a>
                                     <a href="{% url 'auth_logout' %}">Log out</a>
                                 {% else %}

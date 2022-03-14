@@ -9,7 +9,7 @@ UserModel = get_user_model()
 
 class OrderModel(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.RESTRICT, related_name='orders', verbose_name=_('user'))
-    total_price = models.FloatField(verbose_name=_('total price'))
+    total_price = models.FloatField()
     product = models.ManyToManyField(ProductModel)
 
     first_name = models.CharField(max_length=50, verbose_name=_('first name'))
@@ -31,6 +31,9 @@ class OrderModel(models.Model):
     class Meta:
         verbose_name = 'order'
         verbose_name_plural = 'orders'
+
+
+
 
 
 
