@@ -109,6 +109,17 @@ class ProductModel(models.Model):
 
     @staticmethod
     def get_cart_info(cart):
-        return ProductModel.objects.filter(id__in=cart)   # in bu faqat list va tuple tipidagi (boyicha) malumotlani ciqarib beradi
+        return ProductModel.objects.filter(
+            id__in=cart)  # in bu faqat list va tuple tipidagi (boyicha) malumotlani ciqarib beradi
 
 
+class ProductImageModel(models.Model):
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='product_image')
+    image = models.ImageField(upload_to='product_image/')
+
+    def __str__(self):
+        return self.product.name
+
+    class Meta:
+        verbose_name = 'product image'
+        verbose_name_plural = 'product images'
