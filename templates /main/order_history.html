@@ -38,17 +38,17 @@
                         <tbody>
                         {% for order in object_list %}
                             <tr>
-                                <th scope="row">{{ order.pk }}</th>
+                                <th scope="row">{{ order.id }}</th>
                                 <td>
                                     <ul>
-                                        {% for product in order.products.all %}
+                                        {% for product in order.product.all %}
                                             <li>
                                             {{ product.name }}
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </td>
-                                <td>{{ order.price }}</td>
+                                <td>{{ order.total_price}}</td>
                                 <td>{{ order.created_at }}</td>
                             </tr>
                         {% endfor %}

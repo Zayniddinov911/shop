@@ -1,5 +1,5 @@
 from django.db.models import Sum
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,18 +18,21 @@ class CheckoutView(CreateView):
 
     def form_valid(self, form):
         cart = self.request.session.get('cart', [])
-        products = ProductModel.get_cart_info(cart)
+        product = ProductModel.get_cart_info(cart)
 
         form.instance.user = self.request.user
-        form.instance.price = products.aggregate(
+        form.instance.price = product.aggregate(
             Sum('real_price')
         )['real_price__sum']
 
-        orders = form.save()
+        order = form.save()
 
-        orders.products.set(products)
+        order.product.set(product)
 
-        return super().form_valid(form)
+        self.request.session['cart'] = []
+
+        # return super().form_valid(form)
+        return redirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
