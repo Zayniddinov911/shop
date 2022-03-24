@@ -26,7 +26,7 @@ class OrderModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.total_price}' #Temporary
+        return f'{self.product} {self.user}' #Temporary
 
     class Meta:
         verbose_name = 'order'
